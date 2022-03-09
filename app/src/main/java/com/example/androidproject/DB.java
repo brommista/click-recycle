@@ -22,16 +22,16 @@ public class DB extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVeesion, int newVersion){
         db.execSQL("drop table if exists user");
     }
-    public Boolean insertData(String username, String password){
+    public Boolean insertData(String user1, String pass1){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put("username",username);
-        values.put("password", password);
+        values.put("username",user1);
+        values.put("password", pass1);
         long result = db.insert("users", null,values);
-        if(result ==-1) return false;
-        else
-            return true;
+        if(result ==-1) {return false;}
+        else{
+            return true;}
     }
     public Boolean checkUsername(String username){
         SQLiteDatabase db = this.getWritableDatabase();

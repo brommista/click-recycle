@@ -25,8 +25,7 @@ public class loginActivity extends AppCompatActivity {
         password1 = (EditText) findViewById(R.id.txt_password);
         login = (Button) findViewById(R.id.btn_login);
         db = new DB(this);
-        String username = username1.getText().toString();
-        String password = password1.getText().toString();
+
 
 
 
@@ -34,6 +33,9 @@ public class loginActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View view){
+                String username = username1.getText().toString();
+                String password = password1.getText().toString();
+
                 if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
                     Toast.makeText(loginActivity.this,"Please enter all fields", Toast.LENGTH_LONG).show();
 
