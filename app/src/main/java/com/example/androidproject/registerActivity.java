@@ -26,6 +26,7 @@ public class registerActivity extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.txt_password);
         cpass = (EditText) findViewById(R.id.txt_cpassword);
         loginpage = (Button) findViewById(R.id.btn_loginpage);
+        db1 = new DB(this);
         loginpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,8 +52,8 @@ public class registerActivity extends AppCompatActivity {
                             Boolean insert = db1.insertData(user1, pass1);
                             if (insert == true) {
                                 Toast.makeText(registerActivity.this, "Registration Successfully", Toast.LENGTH_LONG).show();
-                                //Intent intent1 = new Intent(getApplicationContext(), loginActivity.class);
-                                //startActivity(intent1);
+                                Intent intent1 = new Intent(getApplicationContext(), loginActivity.class);
+                                startActivity(intent1);
                             } else {
                                 Toast.makeText(registerActivity.this, "Registeration Failed", Toast.LENGTH_LONG).show();
                             }

@@ -19,7 +19,7 @@ public class DB extends SQLiteOpenHelper {
 
     }
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVeesion, int newVersion){
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("drop table if exists user");
     }
     public Boolean insertData(String user1, String pass1){
@@ -29,9 +29,9 @@ public class DB extends SQLiteOpenHelper {
         values.put("username",user1);
         values.put("password", pass1);
         long result = db.insert("users", null,values);
-        if(result ==-1) {return false;}
-        else{
-            return true;}
+        if(result ==-1) return false;
+        else
+            return true;
     }
     public Boolean checkUsername(String username){
         SQLiteDatabase db = this.getWritableDatabase();
