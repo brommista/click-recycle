@@ -11,6 +11,7 @@ import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -20,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class cameraActivity extends AppCompatActivity {
-    Button camera;
+    Button camera, find;
     ImageView imageview;
 
     private static final int RequestPermissionCode = 1;
@@ -40,6 +41,7 @@ public class cameraActivity extends AppCompatActivity {
             startActivityForResult(intent, 7);
         }
     });
+
 }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -52,11 +54,13 @@ public class cameraActivity extends AppCompatActivity {
     public void EnableRuntimePermission(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(cameraActivity.this,
                 Manifest.permission.CAMERA)) {
-            Toast.makeText(cameraActivity.this,"CAMERA permission allows us to Access CAMERA app",     Toast.LENGTH_LONG).show();
+            Toast.makeText(cameraActivity.this,"CAMERA permission allow the access to CAMERA app",     Toast.LENGTH_LONG).show();
         } else {
             ActivityCompat.requestPermissions(cameraActivity.this,new String[]{
                     Manifest.permission.CAMERA}, RequestPermissionCode);
         }
     }
+
+
 
 }
