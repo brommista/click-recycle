@@ -12,44 +12,32 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.service.controls.templates.ThumbnailTemplate;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.example.androidproject.ml.ModelUnquant;
-
 import org.tensorflow.lite.DataType;
-
-
-import org.tensorflow.lite.support.common.FileUtil;
 import org.tensorflow.lite.support.model.Model;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 
 public class cameraActivity extends AppCompatActivity {
     Button camera, find;
     ImageView imageview;
-    TextView result;
+    TextView result,detail;
     Bitmap bitmap;
-
-
-    private List<String> labels;
-
     private static final int RequestPermissionCode = 1;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +46,7 @@ public class cameraActivity extends AppCompatActivity {
         find = (Button) findViewById(R.id.btn_find);
         imageview = (ImageView) findViewById(R.id.imageView1);
         result = (TextView) findViewById(R.id.txt_output);
+        detail = (TextView) findViewById(R.id.txt_detail);
 
         EnableRuntimePermission();
 
@@ -67,10 +56,6 @@ public class cameraActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 7);
-
-
-
-
         }
     });
 
@@ -85,16 +70,8 @@ public class cameraActivity extends AppCompatActivity {
             imageview.setImageBitmap(bitmap);
             bitmap = Bitmap.createScaledBitmap(bitmap,224,224,true);
             classifyImage(bitmap);
-            //find.setOnClickListener(new View.OnClickListener() {
-               // @Override
-                //public void onClick(View view) {
 
-
-
-                //}
-            //});
         }
-
 
     }
     public void EnableRuntimePermission(){
@@ -126,7 +103,6 @@ public class cameraActivity extends AppCompatActivity {
 
                 }
             }
-
             inputFeature0.loadBuffer(byteBuffer);
 
             // Runs model inference and gets result.
@@ -141,10 +117,33 @@ public class cameraActivity extends AppCompatActivity {
                     maxPros = i;
                 }
             }
-            //String[] classes = {"cardboard","glass","metal","paper", "plastic", "trash"};
-            String[] classes = {"plastic","cardboard","glass"};
-            result.setText(classes[maxPros]);
 
+            String[] classes = {"plastic", "paper", "trash", "metal", "glass", "cardboard"};
+            result.setText(classes[maxPros].toUpperCase() + " "+(maxConfidence*100) + "%");
+            if(classes[maxPros]=="plastic"){
+                detail.setText("");
+
+            }
+            else if(classes[maxPros]=="paper"){
+                detail.setText("");
+
+            }
+            else if(classes[maxPros]=="trash"){
+                detail.setText("");
+
+            }
+            else if(classes[maxPros]=="metal"){
+                detail.setText("");
+
+            }
+            else if(classes[maxPros]=="glass"){
+                detail.setText("");
+
+            }
+            else if(classes[maxPros]=="cardboard"){
+                detail.setText("");
+
+            }
             // Releases model resources if no longer used.
             model.close();
         } catch (IOException e) {
@@ -152,7 +151,4 @@ public class cameraActivity extends AppCompatActivity {
 
         }
     }
-
-
-
 }
