@@ -1,4 +1,6 @@
 <resources>
     //******
     <string name="app_name">Find Recycle</string>
+    <string name="google_maps_key">AIzaSyDCIKWEQNmfvSehhsMlTrkfWKCoSgP8YG0</string>
+
 </resources>

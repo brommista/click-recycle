@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loginh = (Button) findViewById(R.id.btn_loginhome);
+        //Open login screen
         loginh.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         registerh = (Button) findViewById(R.id.btn_register);
+
+        //Open register screen
         registerh.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
